@@ -21,4 +21,14 @@ public class Sale {
         return saleService.saveSale(saleDTO);
 
     }
+
+    @DeleteMapping
+    public boolean deleteSale(@RequestParam String id){
+        return saleService.deleteSale(id);
+    }
+
+    @PutMapping
+    public boolean updateSale(@RequestBody SaleDTO saleDTO){
+        return saleService.updateSale(saleDTO);
+    }
 }
