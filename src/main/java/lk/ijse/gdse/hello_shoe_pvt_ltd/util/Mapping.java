@@ -82,4 +82,18 @@ public class Mapping {
     public List<ReturnDTO> toReturnDTOList(List<ReturnEntity> returnEntities){
         return mapper.map(returnEntities, List.class);
     }
+
+    //Sale Mapping
+
+    public SaleDTO toSaleDTO(SaleEntity saleEntity){
+        return mapper.map(saleEntity, SaleDTO.class);
+    }
+
+    public SaleEntity toSaleEntity(SaleDTO saleDTO){
+        return mapper.map(saleDTO, SaleEntity.class);
+    }
+
+    public List<SaleDTO> toSaleDTOList(List<SaleEntity> saleEntities){
+        return mapper.map(saleEntities, List.class);
+    }
 }
