@@ -1,5 +1,8 @@
-package lk.ijse.gdse.hello_shoe_pvt_ltd.dto;
+package lk.ijse.gdse.hello_shoe_pvt_ltd.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +12,10 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class SaleDTO implements SuperDTO{
+@Entity
+@Table(name = "sale")
+public class SaleEntity implements SuperEntity{
+    @Id
     private String order_id;
     private String item_code;
     private String customer_name;
