@@ -22,6 +22,35 @@ public class Inventory {
 
     }
 
+    @PutMapping
+    public boolean updateInventory(@RequestBody InventoryDTO inventoryDTO){
+        return inventoryService.updateInventory(inventoryDTO);
+    }
+
+    @DeleteMapping
+    public boolean deleteInventory(@RequestParam String item_code){
+        return inventoryService.deleteInventory(item_code);
+    }
+
+    @GetMapping("/find")
+    public InventoryDTO searchInventory(@RequestParam String item_code){
+        System.out.println(item_code);
+        InventoryDTO inventoryDTO = new InventoryDTO();
+        inventoryDTO.setItem_code(item_code);
+        return inventoryDTO;
+
+    }
+
+    @GetMapping
+    public InventoryDTO getAllInventories(){
+
+        InventoryDTO inventoryDTO = new InventoryDTO();
+        inventoryDTO.setItem_code("I001");
+        inventoryDTO.setItem_desc("leather");
+        inventoryDTO.setQty_on_hand(10);
+        return inventoryDTO;
+    }
+
 
 
 

@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -29,6 +30,11 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public boolean deleteInventory(String id) {
+        Optional<InventoryEntity> tmpInventory = inventoryRepo.findById(id);
+        if (tmpInventory.isPresent()) {
+            inventoryRepo.delete(tmpInventory.get());
+            return true;
+        }
         return false;
     }
 
