@@ -1,6 +1,5 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.controller;
 
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.ReturnDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SaleDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.SaleService;
 import lombok.RequiredArgsConstructor;
@@ -23,12 +22,28 @@ public class Sale {
     }
 
     @DeleteMapping
-    public boolean deleteSale(@RequestParam String id){
-        return saleService.deleteSale(id);
+    public boolean deleteSale(@RequestParam String order_id){
+        return saleService.deleteSale(order_id);
     }
 
     @PutMapping
     public boolean updateSale(@RequestBody SaleDTO saleDTO){
         return saleService.updateSale(saleDTO);
+    }
+
+    @GetMapping("/find")
+    public SaleDTO searchSale(@RequestParam String order_id){
+        System.out.println(order_id);
+        SaleDTO saleDTO = new SaleDTO();
+        saleDTO.setOrder_id(order_id);
+        return saleDTO;
+
+    }
+
+    @GetMapping
+    public SaleDTO getAllSales(){
+        SaleDTO saleDTO = new SaleDTO();
+        saleDTO.setOrder_id("O001");
+        return saleDTO;
     }
 }
