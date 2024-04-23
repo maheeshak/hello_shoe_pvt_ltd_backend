@@ -40,7 +40,11 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public boolean updateInventory(InventoryDTO inventoryDTO) {
-        return false;
+        Optional<InventoryEntity> tmpInventory = inventoryRepo.findById(inventoryDTO.getItem_code());
+        if (tmpInventory.isPresent()) {
+            converter.convertInventoryEntity(inventoryDTO, tmpInventory.get());
+        }
+        return true;
     }
 
     @Override
