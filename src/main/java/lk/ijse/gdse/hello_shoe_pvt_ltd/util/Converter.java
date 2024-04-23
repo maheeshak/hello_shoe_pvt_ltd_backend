@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class Converter {
 
-    public void covertCustomerEntity(CustomerDTO customerDTO,CustomerEntity customerEntity){
+    public void covertCustomerEntity(CustomerDTO customerDTO, CustomerEntity customerEntity) {
 
         customerEntity.setCustomer_code(customerDTO.getCustomer_code());
         customerEntity.setCustomer_name(customerDTO.getCustomer_name());
@@ -29,7 +29,7 @@ public class Converter {
 
     }
 
-    public void convertSupplierEntity(SupplierDTO supplierDTO, SupplierEntity supplierEntity){
+    public void convertSupplierEntity(SupplierDTO supplierDTO, SupplierEntity supplierEntity) {
         supplierEntity.setSupplier_code(supplierDTO.getSupplier_code());
         supplierEntity.setSupplier_name(supplierDTO.getSupplier_name());
         supplierEntity.setCategory(supplierDTO.getCategory());
@@ -69,7 +69,7 @@ public class Converter {
 
     }
 
-    public void convertInventoryEntity(InventoryDTO inventoryDTO, InventoryEntity inventoryEntity){
+    public void convertInventoryEntity(InventoryDTO inventoryDTO, InventoryEntity inventoryEntity) {
         inventoryEntity.setItem_code(inventoryDTO.getItem_code());
         inventoryEntity.setItem_desc(inventoryDTO.getItem_desc());
         inventoryEntity.setItem_pic(inventoryDTO.getItem_pic());
@@ -87,10 +87,25 @@ public class Converter {
 
     }
 
-    public void convertReturnEntity(ReturnDTO returnDTO, ReturnEntity returnEntity){
+    public void convertReturnEntity(ReturnDTO returnDTO, ReturnEntity returnEntity) {
         returnEntity.setReturn_id(returnDTO.getReturn_id());
         returnEntity.setOrder_id(returnDTO.getOrder_id());
         returnEntity.setReturn_date(returnDTO.getReturn_date());
         returnEntity.setReturn_reason(returnDTO.getReturn_reason());
+    }
+
+    public void convertSaleEntity(SaleDTO saleDTO, SaleEntity saleEntity) {
+        saleEntity.setOrder_id(saleDTO.getOrder_id());
+        saleEntity.setItem_code(saleDTO.getItem_code());
+        saleEntity.setCustomer_name(saleDTO.getCustomer_name());
+        saleEntity.setItem_desc(saleDTO.getItem_desc());
+        saleEntity.setSize(saleDTO.getSize());
+        saleEntity.setUnit_price(saleDTO.getUnit_price());
+        saleEntity.setItem_qty(saleDTO.getItem_qty());
+        saleEntity.setTotal_price(saleDTO.getTotal_price());
+        saleEntity.setPurchase_date(saleDTO.getPurchase_date());
+        saleEntity.setPayment_method(saleDTO.getPayment_method());
+        saleEntity.setAdded_points(saleDTO.getAdded_points());
+        saleEntity.setCashier_name(saleDTO.getCashier_name());
     }
 }
