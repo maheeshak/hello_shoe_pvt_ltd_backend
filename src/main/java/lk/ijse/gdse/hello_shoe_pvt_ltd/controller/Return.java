@@ -23,6 +23,11 @@ public class Return {
 
     }
 
+    @DeleteMapping
+    public boolean deleteReturn(@RequestParam String return_id){
+        return returnService.deleteReturn(return_id);
+    }
+
 
 
 

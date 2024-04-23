@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dao.InventoryRepo;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dao.ReturnRepo;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.ReturnDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.InventoryEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.ReturnEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.ReturnService;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Converter;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -30,6 +32,12 @@ public class ReturnServiceImpl implements ReturnService {
 
     @Override
     public boolean deleteReturn(String id) {
+
+        Optional<ReturnEntity> tmpReturn = returnRepo.findById(id);
+        if (tmpReturn.isPresent()) {
+            returnRepo.delete(tmpReturn.get());
+            return true;
+        }
         return false;
     }
 
