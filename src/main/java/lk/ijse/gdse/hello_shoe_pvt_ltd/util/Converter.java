@@ -1,13 +1,7 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.util;
 
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.CustomerDTO;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.EmployeeDTO;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.InventoryDTO;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SupplierDTO;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.CustomerEntity;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.EmployeeEntity;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.InventoryEntity;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.SupplierEntity;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.*;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -93,4 +87,10 @@ public class Converter {
 
     }
 
+    public void convertReturnEntity(ReturnDTO returnDTO, ReturnEntity returnEntity){
+        returnEntity.setReturn_id(returnDTO.getReturn_id());
+        returnEntity.setOrder_id(returnDTO.getOrder_id());
+        returnEntity.setReturn_date(returnDTO.getReturn_date());
+        returnEntity.setReturn_reason(returnDTO.getReturn_reason());
+    }
 }
