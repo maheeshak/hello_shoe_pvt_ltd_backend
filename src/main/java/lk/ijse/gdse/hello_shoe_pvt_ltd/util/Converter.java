@@ -2,9 +2,11 @@ package lk.ijse.gdse.hello_shoe_pvt_ltd.util;
 
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.CustomerDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.EmployeeDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.InventoryDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SupplierDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.CustomerEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.EmployeeEntity;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.InventoryEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.SupplierEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -69,6 +71,24 @@ public class Converter {
         employeeEntity.setEmail(employeeDTO.getEmail());
         employeeEntity.setGuardian_name(employeeDTO.getGuardian_name());
         employeeEntity.setEmergency_contact(employeeDTO.getEmergency_contact());
+
+
+    }
+
+    public void convertInventoryEntity(InventoryDTO inventoryDTO, InventoryEntity inventoryEntity){
+        inventoryEntity.setItem_code(inventoryDTO.getItem_code());
+        inventoryEntity.setItem_desc(inventoryDTO.getItem_desc());
+        inventoryEntity.setItem_pic(inventoryDTO.getItem_pic());
+        inventoryEntity.setQty_on_hand(inventoryDTO.getQty_on_hand());
+        inventoryEntity.setCategory(inventoryDTO.getCategory());
+        inventoryEntity.setSize(inventoryDTO.getSize());
+        inventoryEntity.setSupplier_code(inventoryDTO.getSupplier_code());
+        inventoryEntity.setSupplier_name(inventoryDTO.getSupplier_name());
+        inventoryEntity.setSelling_price(inventoryDTO.getSelling_price());
+        inventoryEntity.setBuying_price(inventoryDTO.getBuying_price());
+        inventoryEntity.setExpected_profit(inventoryDTO.getExpected_profit());
+        inventoryEntity.setProfit_margin(inventoryDTO.getProfit_margin());
+        inventoryEntity.setStatus(inventoryDTO.getStatus());
 
 
     }
