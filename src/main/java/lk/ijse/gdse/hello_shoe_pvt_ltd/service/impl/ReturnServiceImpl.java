@@ -43,7 +43,12 @@ public class ReturnServiceImpl implements ReturnService {
 
     @Override
     public boolean updateReturn(ReturnDTO returnDTO) {
-        return false;
+        Optional<ReturnEntity> tmpReturn = returnRepo.findById(returnDTO.getReturn_id());
+        if (tmpReturn.isPresent()) {
+            converter.convertReturnEntity(returnDTO, tmpReturn.get());
+        }
+        return true;
+
     }
 
     @Override

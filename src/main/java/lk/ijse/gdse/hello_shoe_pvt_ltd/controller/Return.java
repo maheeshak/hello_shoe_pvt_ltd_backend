@@ -28,6 +28,11 @@ public class Return {
         return returnService.deleteReturn(return_id);
     }
 
+    @PutMapping
+    public boolean updateReturn(@RequestBody ReturnDTO returnDTO){
+        return returnService.updateReturn(returnDTO);
+    }
+
 
 
 
