@@ -13,8 +13,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "return")
-public class ReturnEntity {
+@Table(name = "return_detail")
+public class ReturnEntity implements SuperEntity{
     @Id
     private String return_id;
     private String order_id;
