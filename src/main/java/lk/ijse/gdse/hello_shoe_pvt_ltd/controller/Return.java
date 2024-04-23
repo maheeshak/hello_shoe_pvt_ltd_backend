@@ -33,6 +33,21 @@ public class Return {
         return returnService.updateReturn(returnDTO);
     }
 
+    @GetMapping("/find")
+    public ReturnDTO searchReturn(@RequestParam String return_id){
+        System.out.println(return_id);
+        ReturnDTO returnDTO = new ReturnDTO();
+        returnDTO.setReturn_id(return_id);
+        return returnDTO;
+
+    }
+    @GetMapping
+    public ReturnDTO getAllReturns(){
+        ReturnDTO returnDTO = new ReturnDTO();
+        returnDTO.setReturn_id("R001");
+        return returnDTO;
+    }
+
 
 
 
