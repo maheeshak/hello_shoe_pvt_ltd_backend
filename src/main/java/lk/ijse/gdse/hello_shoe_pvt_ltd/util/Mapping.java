@@ -1,13 +1,7 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.util;
 
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.CustomerDTO;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.EmployeeDTO;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.InventoryDTO;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SupplierDTO;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.CustomerEntity;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.EmployeeEntity;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.InventoryEntity;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.SupplierEntity;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.*;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.*;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -73,5 +67,19 @@ public class Mapping {
 
     public List<InventoryDTO> toInventoryDTOList(List<InventoryEntity> inventories){
         return mapper.map(inventories, List.class);
+    }
+
+
+    //Return mapping
+    public ReturnDTO toReturnDTO(ReturnEntity returnEntity){
+        return mapper.map(returnEntity, ReturnDTO.class);
+    }
+
+    public ReturnEntity toReturnEntity(ReturnDTO returnDTO){
+        return mapper.map(returnDTO, ReturnEntity.class);
+    }
+
+    public List<ReturnDTO> toReturnDTOList(List<ReturnEntity> returnEntities){
+        return mapper.map(returnEntities, List.class);
     }
 }
