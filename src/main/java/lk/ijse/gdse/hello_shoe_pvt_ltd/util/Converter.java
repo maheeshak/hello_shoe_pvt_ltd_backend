@@ -108,4 +108,10 @@ public class Converter {
         saleEntity.setAdded_points(saleDTO.getAdded_points());
         saleEntity.setCashier_name(saleDTO.getCashier_name());
     }
+
+    public void convertSizeEntity(SizeDTO sizeDTO, SizeEntity sizeEntity) {
+        sizeEntity.setSize_id(sizeDTO.getSize_id());
+        sizeEntity.setSize(sizeDTO.getSize());
+        sizeEntity.setCategory(sizeDTO.getCategory());
+    }
 }
