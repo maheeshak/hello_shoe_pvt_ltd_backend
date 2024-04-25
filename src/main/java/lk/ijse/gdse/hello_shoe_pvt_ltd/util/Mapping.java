@@ -96,4 +96,18 @@ public class Mapping {
     public List<SaleDTO> toSaleDTOList(List<SaleEntity> saleEntities){
         return mapper.map(saleEntities, List.class);
     }
+
+
+    //Size Mapping
+    public SizeDTO toSizeDTO(SizeEntity sizeEntity){
+        return mapper.map(sizeEntity, SizeDTO.class);
+    }
+
+    public SizeEntity toSizeEntity(SizeDTO sizeDTO){
+        return mapper.map(sizeDTO, SizeEntity.class);
+    }
+
+    public List<SizeDTO> toSizeDTOList(List<SizeEntity> sizeEntities){
+        return mapper.map(sizeEntities, List.class);
+    }
 }
