@@ -1,9 +1,9 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.service.impl;
 
 import jakarta.transaction.Transactional;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dao.ReturnRepo;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dao.SaleRepo;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dao.SizeRepo;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SizeDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.SizeEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.SizeService;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Converter;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Mapping;
@@ -16,12 +16,14 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class SizeServiceImpl implements SizeService {
-    private final SaleRepo saleRepo;
+    private final SizeRepo sizeRepo;
     private final Mapping mapping;
     private final Converter converter;
     @Override
     public boolean saveSize(SizeDTO sizeDTO) {
-        return false;
+        SizeEntity sizeEntity = mapping.toSizeEntity(sizeDTO);
+        sizeRepo.save(sizeEntity);
+        return true;
     }
 
     @Override
