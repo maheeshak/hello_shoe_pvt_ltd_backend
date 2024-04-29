@@ -1,6 +1,7 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.controller;
 
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SaleDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.SaleDetailDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.SaleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +17,8 @@ public class Sale {
     }
 
     @PostMapping
-    public boolean saveSale(@RequestBody SaleDTO saleDTO){
-        return saleService.saveSale(saleDTO);
+    public boolean saveSale(@RequestBody SaleDetailDTO saleDetailDTO){
+        return saleService.saveSale(saleDetailDTO);
 
     }
 

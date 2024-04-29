@@ -2,10 +2,13 @@ package lk.ijse.gdse.hello_shoe_pvt_ltd.service.impl;
 
 import jakarta.transaction.Transactional;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dao.ReturnRepo;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dao.SaleInventoryDetailsRepo;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dao.SaleRepo;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SaleDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.SaleDetailDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.ReturnEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.SaleEntity;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.SaleInventoryDetailsEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.SaleService;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Converter;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Mapping;
@@ -20,13 +23,22 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SaleServiceImpl implements SaleService {
     private final SaleRepo saleRepo;
+private final SaleInventoryDetailsRepo saleInventoryDetailsRepo;
     private final Mapping mapping;
     private final Converter converter;
     @Override
-    public boolean saveSale(SaleDTO saleDTO) {
-        SaleEntity saleEntity = mapping.toSaleEntity(saleDTO);
-        saleRepo.save(saleEntity);
-        return true;
+    public boolean saveSale(SaleDetailDTO saleDetailDTO) {
+        SaleEntity saleEntity = mapping.toSaleEntity(saleDetailDTO.getSaleDTO());
+       List<SaleInventoryDetailsEntity> saleInventoryDetailsEntities= mapping.mapToSaleDetailsDTO(saleDetailDTO);
+       saleRepo.save(saleEntity);
+       saleInventoryDetailsRepo.saveAll(saleInventoryDetailsEntities);
+
+       if(saleRepo.existsById(saleEntity.getOrder_id())){
+           return true;
+       }
+         return false;
+
+
 
     }
 

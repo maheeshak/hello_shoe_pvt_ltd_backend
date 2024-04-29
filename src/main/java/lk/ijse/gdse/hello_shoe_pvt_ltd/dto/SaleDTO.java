@@ -11,15 +11,10 @@ import java.sql.Timestamp;
 @Data
 public class SaleDTO implements SuperDTO{
     private String order_id;
-    private String item_code;
-    private String customer_name;
-    private String item_desc;
-    private int size;
-    private double unit_price;
-    private int item_qty;
     private double total_price;
     private Timestamp purchase_date;
     private String payment_method;
     private double added_points;
     private String cashier_name;
+    private CustomerDTO customerDTO;
 }

@@ -2,11 +2,14 @@ package lk.ijse.gdse.hello_shoe_pvt_ltd.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,4 +30,7 @@ public class SupplierEntity implements SuperEntity{
     private String contact_01;
     private String contact_02;
     private String email;
+
+    @OneToMany(mappedBy = "supplierEntity")
+    private List<InventoryEntity> inventories;
 }

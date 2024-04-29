@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -21,4 +24,5 @@ public class SupplierDTO implements SuperDTO {
     private String contact_01;
     private String contact_02;
     private String email;
+    private List<InventoryDTO> inventories =new ArrayList<>();
 }

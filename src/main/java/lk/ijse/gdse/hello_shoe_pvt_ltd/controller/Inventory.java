@@ -47,7 +47,7 @@ public class Inventory {
         InventoryDTO inventoryDTO = new InventoryDTO();
         inventoryDTO.setItem_code("I001");
         inventoryDTO.setItem_desc("leather");
-        inventoryDTO.setQty_on_hand(10);
+
         return inventoryDTO;
     }
 

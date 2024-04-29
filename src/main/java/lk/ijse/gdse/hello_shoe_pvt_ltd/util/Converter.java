@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class Converter {
+    private final Mapping mapper;
 
     public void covertCustomerEntity(CustomerDTO customerDTO, CustomerEntity customerEntity) {
 
@@ -70,19 +71,15 @@ public class Converter {
     }
 
     public void convertInventoryEntity(InventoryDTO inventoryDTO, InventoryEntity inventoryEntity) {
+      inventoryEntity.setSupplierEntity(mapper.toSupplierEntity(inventoryDTO.getSupplierDTO()));
         inventoryEntity.setItem_code(inventoryDTO.getItem_code());
         inventoryEntity.setItem_desc(inventoryDTO.getItem_desc());
         inventoryEntity.setItem_pic(inventoryDTO.getItem_pic());
-        inventoryEntity.setQty_on_hand(inventoryDTO.getQty_on_hand());
-        inventoryEntity.setCategory(inventoryDTO.getCategory());
-        inventoryEntity.setSize(inventoryDTO.getSize());
-        inventoryEntity.setSupplier_code(inventoryDTO.getSupplier_code());
-        inventoryEntity.setSupplier_name(inventoryDTO.getSupplier_name());
-        inventoryEntity.setSelling_price(inventoryDTO.getSelling_price());
-        inventoryEntity.setBuying_price(inventoryDTO.getBuying_price());
-        inventoryEntity.setExpected_profit(inventoryDTO.getExpected_profit());
-        inventoryEntity.setProfit_margin(inventoryDTO.getProfit_margin());
-        inventoryEntity.setStatus(inventoryDTO.getStatus());
+        inventoryEntity.setGender(inventoryDTO.getGender());
+        inventoryEntity.setOccasion(inventoryDTO.getOccasion());
+        inventoryEntity.setVariety(inventoryDTO.getVariety());
+
+
 
 
     }
@@ -95,13 +92,8 @@ public class Converter {
     }
 
     public void convertSaleEntity(SaleDTO saleDTO, SaleEntity saleEntity) {
+        saleEntity.setCustomerEntity(mapper.toCustomerEntity(saleDTO.getCustomerDTO()));
         saleEntity.setOrder_id(saleDTO.getOrder_id());
-        saleEntity.setItem_code(saleDTO.getItem_code());
-        saleEntity.setCustomer_name(saleDTO.getCustomer_name());
-        saleEntity.setItem_desc(saleDTO.getItem_desc());
-        saleEntity.setSize(saleDTO.getSize());
-        saleEntity.setUnit_price(saleDTO.getUnit_price());
-        saleEntity.setItem_qty(saleDTO.getItem_qty());
         saleEntity.setTotal_price(saleDTO.getTotal_price());
         saleEntity.setPurchase_date(saleDTO.getPurchase_date());
         saleEntity.setPayment_method(saleDTO.getPayment_method());
