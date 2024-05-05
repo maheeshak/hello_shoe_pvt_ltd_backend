@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "size")
 public class SizeEntity implements SuperEntity {
     @Id
-    private String size_id;
+    private String size_code;
     private int size;
     private String category;
 
