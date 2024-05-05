@@ -36,14 +36,14 @@ public class Size {
     public SizeDTO searchSize(@RequestParam String size_id){
         System.out.println(size_id);
         SizeDTO sizeDTO = new SizeDTO();
-        sizeDTO.setSize_id(size_id);
+        sizeDTO.setSize_code(size_id);
         return sizeDTO;
     }
 
     @GetMapping
     public SizeDTO getAllSizes(){
         SizeDTO sizeDTO = new SizeDTO();
-        sizeDTO.setSize_id("S001");
+        sizeDTO.setSize_code("S001");
         return sizeDTO;
     }
 }
