@@ -11,7 +11,10 @@ import java.util.Date;
 @Data
 public class ReturnDTO implements SuperDTO{
     private String return_id;
-    private String order_id;
     private Date return_date;
-    private String return_reason;
+    private String reason;
+    private String item_code;
+    private String order_id;
+    private String size_code;
+    private Integer qty;
 }
