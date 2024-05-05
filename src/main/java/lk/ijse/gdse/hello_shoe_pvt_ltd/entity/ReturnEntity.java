@@ -17,7 +17,10 @@ import java.util.Date;
 public class ReturnEntity implements SuperEntity{
     @Id
     private String return_id;
-    private String order_id;
     private Date return_date;
-    private String return_reason;
+    private String reason;
+    private String item_code;
+    private String order_id;
+    private String size;
+    private Integer qty;
 }
