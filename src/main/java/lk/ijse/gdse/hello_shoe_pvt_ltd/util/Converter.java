@@ -56,7 +56,7 @@ public class Converter {
         employeeEntity.setRole(employeeDTO.getRole());
         employeeEntity.setDob(employeeDTO.getDob());
         employeeEntity.setJoined_date(employeeDTO.getJoined_date());
-        employeeEntity.setBranch(employeeDTO.getBranch());
+        employeeEntity.setBranch(mapper.toBranchEntity(employeeDTO.getBranch()));
         employeeEntity.setBuilding_no(employeeDTO.getBuilding_no());
         employeeEntity.setLane(employeeDTO.getLane());
         employeeEntity.setCity(employeeDTO.getCity());
@@ -88,11 +88,14 @@ public class Converter {
         returnEntity.setReturn_id(returnDTO.getReturn_id());
         returnEntity.setOrder_id(returnDTO.getOrder_id());
         returnEntity.setReturn_date(returnDTO.getReturn_date());
-        returnEntity.setReturn_reason(returnDTO.getReturn_reason());
+      returnEntity.setReason(returnDTO.getReason());
+        returnEntity.setItem_code(returnDTO.getItem_code());
+        returnEntity.setSize(returnDTO.getSize_code());
+        returnEntity.setQty(returnDTO.getQty());
     }
 
     public void convertSaleEntity(SaleDTO saleDTO, SaleEntity saleEntity) {
-        saleEntity.setCustomerEntity(mapper.toCustomerEntity(saleDTO.getCustomerDTO()));
+        saleEntity.setCustomerEntity(mapper.toCustomerEntity(saleDTO.getCustomer()));
         saleEntity.setOrder_id(saleDTO.getOrder_id());
         saleEntity.setTotal_price(saleDTO.getTotal_price());
         saleEntity.setPurchase_date(saleDTO.getPurchase_date());
@@ -102,8 +105,27 @@ public class Converter {
     }
 
     public void convertSizeEntity(SizeDTO sizeDTO, SizeEntity sizeEntity) {
-        sizeEntity.setSize_id(sizeDTO.getSize_id());
+        sizeEntity.setSize_code(sizeDTO.getSize_code());
         sizeEntity.setSize(sizeDTO.getSize());
         sizeEntity.setCategory(sizeDTO.getCategory());
     }
+
+
+   public void convertBranchEntity(BranchDTO branchDTO, BranchEntity branchEntity){
+        branchEntity.setBranch_code(branchDTO.getBranch_code());
+        branchEntity.setBranch_name(branchDTO.getBranch_name());
+        branchEntity.setBranch_manager(branchDTO.getBranch_manager());
+        branchEntity.setNo_of_employees(branchDTO.getNo_of_employees());
+        branchEntity.setContact(branchDTO.getContact());
+        branchEntity.setAddress(branchDTO.getAddress());
+        branchEntity.setEmployees(mapper.toEmployeeEntityList(branchDTO.getEmployees()));
+    }
+
+    public void convertUserEntity(UserDTO userDTO, UserEntity userEntity){
+        userEntity.setEmail(userDTO.getEmail());
+        userEntity.setPassword(userDTO.getPassword());
+        userEntity.setRole(userDTO.getRole());
+    }
+
+
 }
