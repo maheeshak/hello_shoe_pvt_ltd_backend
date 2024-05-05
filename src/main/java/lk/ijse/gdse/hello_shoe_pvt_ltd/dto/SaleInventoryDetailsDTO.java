@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class SaleInventoryDetailsDTO implements SuperDTO {
     private Long id;
-    private SaleDTO  saleDTO;
-    private InventoryDTO inventoryDTO;
+    private SaleDTO  sale;
+    private InventoryDTO inventory;
     private int size;
     private int item_qty;
     private double selling_price;
