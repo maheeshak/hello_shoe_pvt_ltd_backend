@@ -54,7 +54,7 @@ public class Employee {
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setEmployee_code("EM001");
         employeeDTO.setEmployee_name("Madu");
-        employeeDTO.setBranch("Kandy");
+
 
         employeeDTOS.add(employeeDTO);
         return employeeDTOS;
