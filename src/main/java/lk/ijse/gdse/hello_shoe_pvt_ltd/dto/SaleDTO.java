@@ -16,5 +16,5 @@ public class SaleDTO implements SuperDTO{
     private String payment_method;
     private double added_points;
     private String cashier_name;
-    private CustomerDTO customerDTO;
+    private CustomerDTO customer;
 }
