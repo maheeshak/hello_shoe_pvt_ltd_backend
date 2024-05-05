@@ -125,7 +125,7 @@ public class Mapping {
             SaleInventoryDetailsEntity saleInventoryDetailsEntity = new SaleInventoryDetailsEntity();
             saleInventoryDetailsEntity.setId(saleInventoryDetailsDTO.getId());
             saleInventoryDetailsEntity.setSaleEntity(toSaleEntity(saleDetailDTO.getSaleDTO()));
-            saleInventoryDetailsEntity.setInventoryEntity(toInventoryEntity(saleInventoryDetailsDTO.getInventoryDTO()));
+            saleInventoryDetailsEntity.setInventoryEntity(toInventoryEntity(saleInventoryDetailsDTO.getInventory()));
             saleInventoryDetailsEntity.setSize(saleInventoryDetailsDTO.getSize());
             saleInventoryDetailsEntity.setItem_qty(saleInventoryDetailsDTO.getItem_qty());
             saleInventoryDetailsEntity.setSelling_price(saleInventoryDetailsDTO.getSelling_price());
@@ -134,5 +134,58 @@ public class Mapping {
         }
         return saleInventoryDetailsEntities;
 
+    }
+
+
+    public List<SizeInventoryDetailsEntity> mapToSizeInventoryDetailsEntity(List<SizeInventoryDetailsDTO> sizeInventoryDetailsDTO) {
+        List<SizeInventoryDetailsEntity> sizeInventoryDetailsEntities = new ArrayList<>();
+        for (SizeInventoryDetailsDTO sizeInventoryDetailsDTO1 : sizeInventoryDetailsDTO) {
+            SizeInventoryDetailsEntity sizeInventoryDetailsEntity = new SizeInventoryDetailsEntity();
+            sizeInventoryDetailsEntity.setId(sizeInventoryDetailsDTO1.getId());
+            sizeInventoryDetailsEntity.setSize_code(toSizeEntity(sizeInventoryDetailsDTO1.getSize()));
+            sizeInventoryDetailsEntity.setItem_code(toInventoryEntity(sizeInventoryDetailsDTO1.getInventory()));
+            sizeInventoryDetailsEntity.setStatus(sizeInventoryDetailsDTO1.getStatus());
+            sizeInventoryDetailsEntity.setQty(sizeInventoryDetailsDTO1.getQty());
+            sizeInventoryDetailsEntity.setBuying_price(sizeInventoryDetailsDTO1.getBuying_price());
+            sizeInventoryDetailsEntity.setSelling_price(sizeInventoryDetailsDTO1.getSelling_price());
+            sizeInventoryDetailsEntity.setExpected_profit(sizeInventoryDetailsDTO1.getExpected_profit());
+            sizeInventoryDetailsEntity.setProfit_margin(sizeInventoryDetailsDTO1.getProfit_margin());
+            sizeInventoryDetailsEntities.add(sizeInventoryDetailsEntity);
+        }
+        return sizeInventoryDetailsEntities;
+
+
+    }
+
+    //Branch Mapping
+    public BranchDTO toBranchDTO(BranchEntity branchEntity) {
+        return mapper.map(branchEntity, BranchDTO.class);
+    }
+
+    public BranchEntity toBranchEntity(BranchDTO branchDTO) {
+        return mapper.map(branchDTO, BranchEntity.class);
+    }
+
+    public List<BranchDTO> toBranchDTOList(List<BranchEntity> branchEntities) {
+        return branchEntities.stream().map(branchEntity -> mapper.map(branchEntity, BranchDTO.class)).collect(Collectors.toList());
+    }
+
+
+    public List<EmployeeEntity> toEmployeeEntityList(List<EmployeeDTO> employees) {
+        return employees.stream().map(employeeDTO -> mapper.map(employeeDTO, EmployeeEntity.class)).collect(Collectors.toList());
+    }
+
+
+    //User Mapping
+    public UserDTO toUserDTO(UserEntity userEntity) {
+        return mapper.map(userEntity, UserDTO.class);
+    }
+
+    public UserEntity toUserEntity(UserDTO userDTO) {
+        return mapper.map(userDTO, UserEntity.class);
+    }
+
+    public List<UserDTO> toUserDTOList(List<UserEntity> userEntities) {
+        return userEntities.stream().map(userEntity -> mapper.map(userEntity, UserDTO.class)).collect(Collectors.toList());
     }
 }
