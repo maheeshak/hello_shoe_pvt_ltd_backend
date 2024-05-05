@@ -41,7 +41,7 @@ public class SizeServiceImpl implements SizeService {
 
     @Override
     public boolean updateSize(SizeDTO sizeDTO) {
-        Optional<SizeEntity> tmpSize = sizeRepo.findById(sizeDTO.getSize_id());
+        Optional<SizeEntity> tmpSize = sizeRepo.findById(sizeDTO.getSize_code());
         if (tmpSize.isPresent()) {
             converter.convertSizeEntity(sizeDTO, tmpSize.get());
         }
