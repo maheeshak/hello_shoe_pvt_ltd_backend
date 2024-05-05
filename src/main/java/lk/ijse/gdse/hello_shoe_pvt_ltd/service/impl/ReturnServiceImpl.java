@@ -7,6 +7,7 @@ import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.ReturnDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.InventoryEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.ReturnEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.ReturnService;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.service.SizeInventoryDetailsService;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Converter;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Mapping;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +23,13 @@ public class ReturnServiceImpl implements ReturnService {
     private final ReturnRepo returnRepo;
     private final Mapping mapping;
     private final Converter converter;
-
+    private final SizeInventoryDetailsService sizeInventoryDetailsService;
     @Override
     public boolean saveReturn(ReturnDTO returnDTO) {
         ReturnEntity returnEntity = mapping.toReturnEntity(returnDTO);
         returnRepo.save(returnEntity);
-        return true;
+        sizeInventoryDetailsService.updateQty(returnDTO.getItem_code(), returnDTO.getSize_code(), returnDTO.getQty());
+        return returnRepo.existsById(returnEntity.getReturn_id());
     }
 
     @Override
