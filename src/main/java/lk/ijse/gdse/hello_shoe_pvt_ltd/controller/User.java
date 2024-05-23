@@ -7,30 +7,34 @@ import lk.ijse.gdse.hello_shoe_pvt_ltd.reqAndresp.secure.SignUp;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class User {
+
     private final UserService userService;
+
     private final AuthenticationService authenticationService;
 
-    //Sign up
-    @PostMapping("/signup")
-    public ResponseEntity<JwtAuthResponse> signUp(@RequestBody SignUp signUp){
-        return ResponseEntity.ok(authenticationService.signUp(signUp));
 
+    //signup
+    @PostMapping("/signup")
+    public ResponseEntity<JwtAuthResponse> signUp(@RequestBody SignUp signUp) {
+        return ResponseEntity.ok(authenticationService.signUp(signUp));
     }
 
-    //Sign in
+    //signin
     @PostMapping("/signin")
-    public ResponseEntity<JwtAuthResponse> signIn(@RequestBody SignIn signIn){
+    public ResponseEntity<JwtAuthResponse> signIn(@RequestBody SignIn signIn) {
         return ResponseEntity.ok(authenticationService.signIn(signIn));
     }
 
+    @GetMapping("/role")
+    public String getRole(@RequestParam String email) {
+      return userService.getRole(email);
+    }
 
 }
