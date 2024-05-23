@@ -1,59 +1,67 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.controller;
 
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.CustomerDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.InventoryDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SizeInventoryDetailsDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.InventoryDetailsDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/inventory")
 @RequiredArgsConstructor
-public class Inventory {
-    private final InventoryService inventoryService;
-    @GetMapping("/health")
-    public String healthCheck(){
+@CrossOrigin(origins = "*")
+public class Inventory{
 
-        return "Hello I'm inventory controller and I'm okay!";
+    private final InventoryService inventoryService;
+
+
+    @GetMapping("/health")
+    public String healthCheck() {
+        return "Hello I'm Inventory Controller. I'm OK! Have a nice day!";
     }
+
 
     @PostMapping
     public boolean saveInventory(@RequestBody InventoryDetailsDTO inventoryDetailsDTO) {
         return inventoryService.add(inventoryDetailsDTO);
     }
 
+
     @PutMapping
-    public boolean updateInventory(@RequestBody InventoryDTO inventoryDTO){
-        return inventoryService.updateInventory(inventoryDTO);
+    public boolean updateInventory(@RequestBody List<SizeInventoryDetailsDTO> sizeInventoryDetailsDTOS) {
+        return inventoryService.update(sizeInventoryDetailsDTOS);
     }
+
 
     @DeleteMapping
-    public boolean deleteInventory(@RequestParam String item_code){
-        return inventoryService.deleteInventory(item_code);
+    public boolean deleteInventory(@RequestParam String item_code) {
+        return inventoryService.delete(item_code);
     }
 
-    @GetMapping("/find")
-    public InventoryDTO searchInventory(@RequestParam String item_code){
-        System.out.println(item_code);
-        InventoryDTO inventoryDTO = new InventoryDTO();
-        inventoryDTO.setItem_code(item_code);
-        return inventoryDTO;
-
-    }
 
     @GetMapping
-    public InventoryDTO getAllInventories(){
-
-        InventoryDTO inventoryDTO = new InventoryDTO();
-        inventoryDTO.setItem_code("I001");
-        inventoryDTO.setItem_desc("leather");
-
-        return inventoryDTO;
+    public InventoryDTO searchInventory(@RequestParam String item_code) {
+        return inventoryService.search(item_code);
     }
 
 
+    @GetMapping("/all")
+    public List<InventoryDTO> getAllInventories() {
+        return inventoryService.getAll();
+    }
 
+@GetMapping("/count")
+    public String getInventoryCount() {
+        return inventoryService.getInventoryCount();
+    }
+
+    @GetMapping("/sizeDetails")
+    public List<SizeInventoryDetailsDTO> getSizeDetails(@RequestParam String item_code) {
+        return inventoryService.getSizeDetails(item_code);
+    }
 
 
 }
