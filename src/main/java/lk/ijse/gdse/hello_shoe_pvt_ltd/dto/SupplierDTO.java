@@ -1,28 +1,26 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.dto;
 
-import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Category;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class SupplierDTO implements SuperDTO {
+public class SupplierDTO implements SuperDTO{
     private String supplier_code;
-    private String supplier_name;
+    private String name;
     private Category category;
-    private String building_no;
+    private String building_number;
     private String lane;
     private String city;
     private String state;
     private String postal_code;
     private String country;
-    private String contact_01;
-    private String contact_02;
+    private String mobile_contact;
+    private String landline_contact;
     private String email;
-    private List<InventoryDTO> inventories =new ArrayList<>();
+    private String active_state;
+
 }
