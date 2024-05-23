@@ -1,16 +1,18 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.service;
 
+
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.InventoryDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SizeInventoryDetailsDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.InventoryDetailsDTO;
 
 import java.util.List;
 
-public interface InventoryService {
-    public boolean saveInventory(InventoryDTO inventoryDTO);
-    public boolean add(InventoryDetailsDTO inventoryDetailsDTO);
-    public boolean deleteInventory(String id);
-    public boolean updateInventory(InventoryDTO inventoryDTO);
-    public List<InventoryDTO> getAllInventories();
 
-    InventoryDTO getSelectedInventory(String id);
+public interface InventoryService extends SuperService<String, InventoryDTO>{
+    boolean add(InventoryDetailsDTO inventoryDetailsDTO) ;
+    boolean update(List<SizeInventoryDetailsDTO> inventoryDetailsDTO) ;
+
+    List<SizeInventoryDetailsDTO> getSizeDetails(String itemCode);
+
+    String getInventoryCount();
 }
