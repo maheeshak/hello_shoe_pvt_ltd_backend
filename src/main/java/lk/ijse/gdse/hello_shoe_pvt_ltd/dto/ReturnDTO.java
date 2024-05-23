@@ -1,5 +1,6 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.dto;
 
+import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.SaleInventoryDetailsEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
