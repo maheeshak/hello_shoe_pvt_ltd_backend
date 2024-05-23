@@ -55,7 +55,7 @@ public class Branch{
 
     @GetMapping("/health")
     public String healthCheck() {
-        return "Hello I'm Branch Controller. I'm OK! Have a nice day!";
+        return "Hello I'm Branch Controller. I'm OK! and Have a nice day!";
     }
 
     @GetMapping("/id")
