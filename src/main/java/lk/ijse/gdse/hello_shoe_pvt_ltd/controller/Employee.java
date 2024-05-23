@@ -1,65 +1,80 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.controller;
 
-
-
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.CustomerDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.BranchDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.EmployeeDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.EmployeeCountDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.EmployeeDesigCountsDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.EmployeeService;
-
+import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Designation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/employee")
 @RequiredArgsConstructor
-public class Employee {
+@CrossOrigin(origins = "*")
+public class Employee{
+
     private final EmployeeService employeeService;
 
     @GetMapping("/health")
-    public String healthCheck(){
-        return "Hello I'm employee controller and I'm okay!";
+    public String healthCheck() {
+        return "Hello I'm Employee Controller. I'm OK! Have a nice day!";
     }
 
-    @PostMapping
-    public boolean saveEmployee(@RequestBody EmployeeDTO employeeDTO){
-        return employeeService.saveEmployee(employeeDTO);
-
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public boolean saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        return employeeService.add(employeeDTO);
     }
+
     @PutMapping
-    public boolean updateEmployee(@RequestBody EmployeeDTO employeeDTO){
-        return employeeService.updateEmployee(employeeDTO);
+    public boolean updateEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        return employeeService.update(employeeDTO);
     }
 
     @DeleteMapping
-    public boolean deleteEmployee(@RequestParam String employee_code){
-        return employeeService.deleteEmployee(employee_code);
+    public boolean deleteEmployee(@RequestParam String employee_code) {
+        return employeeService.delete(employee_code);
     }
 
-    @GetMapping("/find")
-    public EmployeeDTO searchEmployee(@RequestParam String employee_code){
-        System.out.println(employee_code);
-        EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setEmployee_code(employee_code);
-        return employeeDTO;
-
-    }
     @GetMapping
-    public List<EmployeeDTO> getAllEmployees(){
-
-        ArrayList<EmployeeDTO> employeeDTOS = new ArrayList<>();
-
-        EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setEmployee_code("EM001");
-        employeeDTO.setEmployee_name("Madu");
-
-
-        employeeDTOS.add(employeeDTO);
-        return employeeDTOS;
-
+    public EmployeeDTO searchEmployee(@RequestParam String employee_code) {
+        return employeeService.search(employee_code);
     }
 
+    @GetMapping("/all")
+    public List<EmployeeDTO> getAllEmployees() {
+        return employeeService.getAll();
+    }
 
+    @GetMapping("/branch")
+    public BranchDTO getBranch(@RequestParam String employee_code) {
+        return employeeService.getBranch(employee_code);
+    }
+
+    @GetMapping("/designations")
+    public List<Designation> getDesignations() {
+        return employeeService.getDesignations();
+    }
+
+    @GetMapping("/id")
+    public String getEmployeeId() {
+        return employeeService.getEmployeeCode();
+    }
+
+    @GetMapping("/count")
+    public EmployeeCountDTO getEmployeeCount() {
+        return employeeService.getEmployeeCount();
+    }
+
+    @GetMapping("/countDesignation")
+    public EmployeeDesigCountsDTO getEmployeeCountByDesignation() {
+        return employeeService.getEmployeeCountByDesignation();
+    } @GetMapping("/totalBranch")
+    public List<String> getEmployeeCountByBranch() {
+        return employeeService.getEmployeeCountByBranch();
+    }
 }
