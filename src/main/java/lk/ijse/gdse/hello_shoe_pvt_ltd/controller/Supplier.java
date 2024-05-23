@@ -1,60 +1,64 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.controller;
 
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.CustomerDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SupplierDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.SupplierCountDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.SupplierService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/supplier")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class Supplier {
 
     private final SupplierService supplierService;
 
     @GetMapping("/health")
     public String healthCheck() {
-        return "Hello I'm supplier controller and I'm okay!";
+        return "Hello I'm Supplier Controller. I'm OK! Have a nice day!";
     }
 
     @PostMapping
     public boolean saveSupplier(@RequestBody SupplierDTO supplierDTO) {
-        return supplierService.saveSupplier(supplierDTO);
+        return supplierService.add(supplierDTO);
     }
 
-     @PutMapping
+    @PutMapping
     public boolean updateSupplier(@RequestBody SupplierDTO supplierDTO) {
-         return supplierService.updateSupplier(supplierDTO);
-     }
+        return supplierService.update(supplierDTO);
+    }
 
-     @DeleteMapping
+    @DeleteMapping
     public boolean deleteSupplier(@RequestParam String supplier_code) {
-         return supplierService.deleteSupplier(supplier_code);
-     }
+        return supplierService.delete(supplier_code);
+    }
 
-     @GetMapping("/find")
-     public SupplierDTO searchSupplier(@RequestParam String supplier_code){
-         System.out.println(supplier_code);
-         SupplierDTO supplierDTO = new SupplierDTO();
-         supplierDTO.setSupplier_code(supplier_code);
-         return supplierDTO;
+    @GetMapping
+    public SupplierDTO searchSupplier(@RequestParam String supplier_code) {
+        return supplierService.search(supplier_code);
+    }
 
-     }
+    @GetMapping("/all")
+    public List<SupplierDTO> getAllSuppliers() {
+        return supplierService.getAll();
+    }
 
-        @GetMapping
-    public List<SupplierDTO> getAllSupplier() {
-            ArrayList<SupplierDTO> supplierDTOS = new ArrayList<>();
+    @GetMapping("/id")
+    public String generateSupplierID() {
+        return supplierService.generateSupplierID();
+    }
 
-            SupplierDTO supplierDTO = new SupplierDTO();
-            supplierDTO.setSupplier_code("Sup001");
-            supplierDTO.setSupplier_name("IJSE");
+    @GetMapping("/nameCode")
+    public String getSupplierNameAndCode(@RequestParam String supplier_name) {
+        return supplierService.getSupplierNameAndCode(supplier_name);
+    }
 
-            supplierDTOS.add(supplierDTO);
-            return supplierDTOS;
-        }
+    @GetMapping("/count")
+    public SupplierCountDTO getSupplierCount() {
+        return supplierService.getSupplierCount();
+    }
 
 }
