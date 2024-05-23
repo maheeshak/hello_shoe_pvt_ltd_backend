@@ -1,30 +1,28 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
 @Table(name = "branch")
-public class BranchEntity implements SuperEntity {
+public class BranchEntity {
     @Id
     private String branch_code;
     private String branch_name;
     private String branch_manager;
-    private int no_of_employees;
-    private String contact;
     private String address;
+    private String contact;
+    private Integer no_of_employee;
 
     @OneToMany(mappedBy = "branch")
-    private List<EmployeeEntity> employees = new ArrayList<>();
+    @JsonManagedReference
+    private List<EmployeeEntity> employees;
 }
