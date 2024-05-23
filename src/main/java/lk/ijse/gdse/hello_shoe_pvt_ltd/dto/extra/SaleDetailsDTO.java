@@ -9,11 +9,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class SaleDetailDTO implements SuperDTO {
+public class SaleDetailsDTO implements SuperDTO {
     private SaleDTO saleDTO;
-    private List<SaleInventoryDetailsDTO> saleInventoryDetailsDTOS;
-
+    private List<SaleInventoryDetailsDTO> saleInventoryDetailsDTO;
 }
