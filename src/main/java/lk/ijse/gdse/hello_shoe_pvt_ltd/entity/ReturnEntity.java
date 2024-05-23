@@ -1,8 +1,6 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,8 +11,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "return_detail")
-public class ReturnEntity implements SuperEntity{
+@Table(name="returnDetails")
+public class ReturnEntity {
     @Id
     private String return_id;
     private Date return_date;
