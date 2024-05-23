@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class SizeInventoryDetailsEntity {
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -29,5 +29,4 @@ public class SizeInventoryDetailsEntity {
     private Double selling_price;
     private Double expected_profit;
     private Double profit_margin;
-
 }
