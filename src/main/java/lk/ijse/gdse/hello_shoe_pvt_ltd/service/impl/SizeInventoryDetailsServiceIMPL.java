@@ -1,8 +1,9 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.service.impl;
 
 import jakarta.transaction.Transactional;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dao.SizeInventoryDetailsRepo;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SizeInventoryDetailsDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.SizeInventoryDetailsEntity;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.repository.SizeInventoryDetailsRepo;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.SizeInventoryDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class SizeInventoryDetailsServiceIMPL implements SizeInventoryDetailsServ
 
     private final SizeInventoryDetailsRepo sizeInventoryDetailsRepo;
 
-/*    @Override
+    @Override
     public boolean add(SizeInventoryDetailsDTO sizeInventoryDetailsDTO) {
         return false;
     }
@@ -39,11 +40,14 @@ public class SizeInventoryDetailsServiceIMPL implements SizeInventoryDetailsServ
     @Override
     public List<SizeInventoryDetailsDTO> getAll() {
         return List.of();
-    }*/
+    }
     @Transactional
     public void updateQty(String itemCode, String sizeCode, int qty) {
-        int currentQty = sizeInventoryDetailsRepo.findQtyByItemCodeAndSize(itemCode, sizeCode);
+
+        String sizeText = "SIZE"+sizeCode;
+
+        int currentQty = sizeInventoryDetailsRepo.findQtyByItemCodeAndSize(itemCode, sizeText);
         int newQty = currentQty + qty;
-        sizeInventoryDetailsRepo.updateQty(itemCode, sizeCode, newQty);
+        sizeInventoryDetailsRepo.updateQty(itemCode, sizeText, newQty);
     }
 }
