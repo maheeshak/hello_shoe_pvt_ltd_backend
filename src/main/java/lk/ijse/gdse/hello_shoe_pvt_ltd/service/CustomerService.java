@@ -2,13 +2,15 @@ package lk.ijse.gdse.hello_shoe_pvt_ltd.service;
 
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.CustomerDTO;
 
-import java.util.List;
+import java.sql.Timestamp;
 
-public interface CustomerService {
-    boolean saveCustomer(CustomerDTO customerDTO);
-    public boolean deleteCustomer(String id);
-    public boolean updateCustomer(CustomerDTO customerDTO);
-    public List<CustomerDTO> getAllCustomers();
+public interface CustomerService extends SuperService<String, CustomerDTO>{
+    String generateCustomerID();
 
-    CustomerDTO getSelectedCustomer(String id);
+    CustomerDTO searchContact(String customerContact);
+
+    void updatePoints(String customerCode, double addedPoints);
+
+    String getCustomerCount();
+
 }
