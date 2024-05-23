@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.JWTService;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.UserService;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Configuration;
@@ -21,44 +22,40 @@ import java.io.IOException;
 @Configuration
 @RequiredArgsConstructor
 public class JWTConfigurationFilter extends OncePerRequestFilter {
-
-//Request hit first here...
-
     private final JWTService jwtService;
     private final UserService userService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
         final String userEmail;
         final String jwt;
         final String authorizationHeader = request.getHeader("Authorization");
 
-        //validation - get the authorization header status and check if it is null or not
+        //validation - Get Auth Header Status
         if (StringUtils.isEmpty(authorizationHeader) || !authorizationHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
-        jwt = authorizationHeader.substring(7); //7 is the length of "Bearer "
+        jwt = authorizationHeader.substring(7);
         userEmail = jwtService.extractUsername(jwt);
 
-        //validation - check if the username is null or not
-        //Security Context Holder is used to store the user details in the context which means already is there any user logged in or not
-
+        //validation - Email validation and status of SecurityContextHolder
         if (StringUtils.isNotEmpty(userEmail) && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userService.userDetailsService().loadUserByUsername(userEmail);
-
-            //validation - check if the token is valid or not
-
+            UserDetails userDetails =
+                    userService.userDetailsService().loadUserByUsername(userEmail);
+            //Validation of Token Status
             if (jwtService.validateToken(jwt, userDetails)) {
-                SecurityContext emptyContext = SecurityContextHolder.createEmptyContext();
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-
-                authToken.setDetails(new WebAuthenticationDetailsSource());
+                SecurityContext emptyContext =
+                        SecurityContextHolder.createEmptyContext();
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities()
+                );
+                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                emptyContext.setAuthentication(authToken);
                 SecurityContextHolder.setContext(emptyContext);
             }
         }
         filterChain.doFilter(request, response);
-
 
     }
 }

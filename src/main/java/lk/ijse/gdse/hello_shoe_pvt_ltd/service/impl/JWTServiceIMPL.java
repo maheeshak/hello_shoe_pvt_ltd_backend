@@ -18,64 +18,68 @@ import java.util.function.Function;
 
 @Service
 public class JWTServiceIMPL implements JWTService {
+
     @Value("${token.key}")
-    private String jwt;
+    private String jwtKey;
     @Override
     public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
+        return extractClaim(token,Claims::getSubject);
     }
 
     @Override
     public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+        return generateToken(new HashMap<>(),userDetails);
     }
 
     @Override
     public boolean validateToken(String token, UserDetails userDetails) {
-        var username = extractUsername(token);
+        String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
+
+
     //actual process
-    private<T> T extractClaim(String token, Function<Claims, T> claimResolver){
+    private <T> T extractClaim(String token, Function<Claims,T> claimsResolver) {
        final Claims claims = getAllClaims(token);
-
-       return claimResolver.apply(claims);
-
+        return claimsResolver.apply(claims);
     }
 
-    private String generateToken(Map<String,Object> extractClaims, UserDetails userDetails){
-        extractClaims.put("role", userDetails.getAuthorities());
+    private String generateToken(Map<String,Object> extractClaim,UserDetails userDetails) {
+
+        extractClaim.put("role",userDetails.getAuthorities());
         Date now = new Date();
-        Date expireDate = new Date(now.getTime() + 1000 * 60*60*10);
-        String accessToken = Jwts.builder().setClaims(extractClaims)
+        //expire time 24 hours and set refresh token
+        Date expire = new Date(now.getTime() + 1000 * 60 * 60 * 24);
+        String accessToken = Jwts.builder().setClaims(extractClaim)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(now)
-                .setExpiration(expireDate)
+                .setExpiration(expire)
                 .signWith(getSignKey(), SignatureAlgorithm.HS256).compact() + " : " +
-                Jwts.builder().setClaims(extractClaims)
+                Jwts.builder().setClaims(extractClaim)
                         .setSubject(userDetails.getUsername())
                         .setIssuedAt(now)
                         .setExpiration(new Date(now.getTime() + 1000 * 60 * 60))
                         .signWith(getSignKey(),SignatureAlgorithm.HS256).compact();
 
-
-
         return accessToken;
-
     }
-    private boolean isTokenExpired(String token){
+
+    private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
-    }
-    private Date extractExpiration(String token){
-        return extractClaim(token, Claims::getExpiration);
-    }
-    private Claims getAllClaims(String token){
-       return Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token).getBody();
+
     }
 
-    private Key getSignKey(){
-        byte[] decode = Decoders.BASE64.decode(jwt);
+    private Claims getAllClaims(String token) {
+     return Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token).getBody();
+
+    }
+
+    private Date extractExpiration(String token) {
+        return extractClaim(token,Claims::getExpiration);
+    }
+    private Key getSignKey() {
+        byte[] decode = Decoders.BASE64.decode(jwtKey);
         return Keys.hmacShaKeyFor(decode);
     }
 }

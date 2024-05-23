@@ -1,5 +1,6 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.config;
 
+
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -23,21 +24,22 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 @EnableMethodSecurity
 public class SecurityConfig {
+
     private final UserService userService;
     private final JWTConfigurationFilter jwtConfigurationFilter;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(req -> req.requestMatchers("/api/v1/user/**")
+                .authorizeHttpRequests(req -> req.requestMatchers("api/v1/user/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated())
-
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(jwtConfigurationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
+
     }
 
 
@@ -46,19 +48,17 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
     public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider dap = new DaoAuthenticationProvider();
+        DaoAuthenticationProvider dap = new DaoAuthenticationProvider(); //Todo : මීට අමතරව අනුමත ප්‍රකාශයක් එකතු කරන්න පුලුවන්
         dap.setUserDetailsService(userService.userDetailsService());
         dap.setPasswordEncoder(passwordEncoder());
         return dap;
-
     }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
-
 
 }
