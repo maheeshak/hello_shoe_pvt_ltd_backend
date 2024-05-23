@@ -1,15 +1,12 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.service;
 
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.CustomerDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SupplierDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.SupplierCountDTO;
 
-import java.util.List;
+public interface SupplierService extends SuperService<String, SupplierDTO> {
+    String generateSupplierID();
 
-public interface SupplierService {
-    boolean saveSupplier(SupplierDTO supplierDTO);
-    public boolean deleteSupplier(String id);
-    public boolean updateSupplier(SupplierDTO supplierDTO);
-    public List<SupplierDTO> getAllSuppliers();
+    String getSupplierNameAndCode(String supplier_name);
 
-    SupplierDTO getSelectedSupplier(String id);
+    SupplierCountDTO getSupplierCount();
 }
