@@ -9,6 +9,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class SizeDTO implements SuperDTO{
     private String size_code;
-    private int size;
-    private String category;
+    private Integer size;
 }
