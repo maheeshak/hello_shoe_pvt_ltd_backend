@@ -20,7 +20,7 @@ public class Inventory{
 
     @GetMapping("/health")
     public String healthCheck() {
-        return "Hello I'm Inventory Controller. I'm OK! Have a nice day!";
+        return "Hello I'm Inventory Controller. and I'm OK! Have a nice day!";
     }
 
 
