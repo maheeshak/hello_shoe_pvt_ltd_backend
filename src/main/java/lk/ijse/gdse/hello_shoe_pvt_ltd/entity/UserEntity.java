@@ -1,10 +1,7 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Role;
+import jakarta.persistence.*;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,27 +17,27 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @Entity
-@Table
-public class UserEntity  implements UserDetails {
+@Table(name = "user")
+public class UserEntity implements UserDetails {
     @Id
     private String id;
     @Column(unique = true)
     private String email;
     private String password;
+    @Enumerated(EnumType.STRING)
     private Role role;
+    private String employee_code;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<GrantedAuthority> authorities = new HashSet<>();
+        Set<GrantedAuthority>  authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_"+role.name()));
         return authorities;
-
     }
 
     @Override
     public String getUsername() {
         return this.email;
-
     }
 
     @Override
