@@ -18,7 +18,7 @@ public class Supplier {
 
     @GetMapping("/health")
     public String healthCheck() {
-        return "Hello I'm Supplier Controller. I'm OK! Have a nice day!";
+        return "Hello I'm Supplier Controller. I'm OK! and Have a nice day!";
     }
 
     @PostMapping
