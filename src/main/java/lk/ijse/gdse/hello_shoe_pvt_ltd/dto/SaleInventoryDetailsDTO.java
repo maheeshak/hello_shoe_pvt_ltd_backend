@@ -4,14 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
+import java.util.Date;
+
+
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class SaleInventoryDetailsDTO implements SuperDTO {
+public class SaleInventoryDetailsDTO implements SuperDTO{
+
     private Long id;
-    private SaleDTO  sale;
+    private SaleDTO sale;
     private InventoryDTO inventory;
     private int size;
-    private int item_qty;
     private double selling_price;
+    private int item_qty;
+    private String status;
+    private String branch_code;
+    private Date date;
+
 }
