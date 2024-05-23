@@ -1,28 +1,28 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.dto;
 
-import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Gender;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Level;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Gender;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Level;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class CustomerDTO implements SuperDTO{
     private String customer_code;
-    private String customer_name;
+    private String name;
     private Gender gender;
-    private Date joined_date;
+    private Date date;
     private Level level;
-    private int total_points;
+    private Integer point;
     private Date dob;
-    private String building_no;
+    private String building_number;
     private String lane;
     private String city;
     private String state;
@@ -30,5 +30,7 @@ public class CustomerDTO implements SuperDTO{
     private String contact;
     private String email;
     private Timestamp recent_purchase;
-    private List<SaleDTO> sales = new ArrayList<>();
+    private String active_state;
+    private List<SaleDTO> sale = new ArrayList<>();
+    private String customer_name;
 }
