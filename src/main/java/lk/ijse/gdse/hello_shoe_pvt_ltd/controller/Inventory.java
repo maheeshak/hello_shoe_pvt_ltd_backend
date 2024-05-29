@@ -3,8 +3,10 @@ package lk.ijse.gdse.hello_shoe_pvt_ltd.controller;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.InventoryDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SizeInventoryDetailsDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.InventoryDetailsDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.ItemUpdateDetailsDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.InventoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +22,7 @@ public class Inventory{
 
     @GetMapping("/health")
     public String healthCheck() {
-        return "Hello I'm Inventory Controller. and I'm OK! Have a nice day!";
+        return "Hello I'm Inventory Controller. I'm OK! Have a nice day!";
     }
 
 
@@ -30,8 +32,14 @@ public class Inventory{
     }
 
 
-    @PutMapping
-    public boolean updateInventory(@RequestBody List<SizeInventoryDetailsDTO> sizeInventoryDetailsDTOS) {
+    public boolean updateInventory(List<SizeInventoryDetailsDTO> inventoryDTO) {
+        return false;
+    }
+
+
+    @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public boolean updateInventory(@RequestPart("itemDTO") ItemUpdateDetailsDTO itemUpdateDetailsDTO, @RequestPart("sizeInventoryDetailsDTO") List<SizeInventoryDetailsDTO> sizeInventoryDetailsDTOS) {
+        inventoryService.updateDetails(itemUpdateDetailsDTO);
         return inventoryService.update(sizeInventoryDetailsDTOS);
     }
 
@@ -53,7 +61,7 @@ public class Inventory{
         return inventoryService.getAll();
     }
 
-@GetMapping("/count")
+    @GetMapping("/count")
     public String getInventoryCount() {
         return inventoryService.getInventoryCount();
     }
@@ -62,6 +70,5 @@ public class Inventory{
     public List<SizeInventoryDetailsDTO> getSizeDetails(@RequestParam String item_code) {
         return inventoryService.getSizeDetails(item_code);
     }
-
 
 }
